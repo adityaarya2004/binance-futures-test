@@ -1,0 +1,22 @@
+name: Test Binance Futures
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Binance Futures API
+        run: |
+          python - << 'EOF'
+          import requests
+
+          url = "https://fapi.binance.com/fapi/v1/exchangeInfo"
+
+          r = requests.get(url, timeout=30)
+
+          print("STATUS:", r.status_code)
+          print(r.text[:1000])
+          EOF
